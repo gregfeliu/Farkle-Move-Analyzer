@@ -8,7 +8,7 @@ Farkle (also called Fark) is a multi-player dice game. In this game, one tries t
 
 In this project, **I seek to understand more about the probabilities of both scoring points the number of points that can be scored on each roll**. The main findings can be found in the following graphic:
 
-![Farkle Cheat Sheet](.images/farkle_cheat_sheet.png)
+![Farkle Cheat Sheet](./images/farkle_cheat_sheet.png)
 
 As you can see, rolling more dice gives you a much larger possibility of both scoring (i.e.: not farking) and winning lots of points. This is due to the increased likelihood of rolling a single point scoring die (1 or a 5) but also due to the increased likelihood of scoring a combo roll (e.g.: 2, 2, 2).
 
