@@ -1,4 +1,3 @@
-# no imports! would you look at that...
 import numpy as np
 import itertools
 import math
