@@ -1,20 +1,16 @@
-import numpy as np
-import itertools
-import math
-import random
+from itertools import product
+from random import randint
 from fractions import Fraction
-
-
 
 
 
 def all_combos(num_of_dice: int):
     assert num_of_dice < 7
-    all_combos = list(itertools.product("123456", repeat=num_of_dice))
+    all_combos = list(product("123456", repeat=num_of_dice))
     return all_combos
 
 def roll_the_dice(all_combos: list):
-    rand_roll_index = random.randint(0, len(all_combos))
+    rand_roll_index = randint(0, len(all_combos))
     roll = all_combos[rand_roll_index]
     return roll, rand_roll_index
 
@@ -45,40 +41,31 @@ def check_6_dice_combos(roll: set):
     # account for all of the special pairs that use 6 dice (in order of points descending)
     # 6 of a kind
     if unique_values_of_roll == {0, 6}: 
-#         print("You got a six of a kind! You get 3,000 points")
         return 3000
     # 2 triplets can't be solved with the set only b/c it will overlap with one triplet...
     elif unique_values_of_roll == {0, 3}: 
-#         print("You got two triplets! You get 2,500 points")
         return 2500
     # straight
     elif unique_values_of_roll == {1}:
-#         print("You got a straight! You get 1,500 points")
         return 1500
     # 3 pairs
     elif unique_values_of_roll == {0, 2}: 
-#         print("You got a three pairs! You get 1,500 points")
         return 1500
     # four of a kind + a pair
     elif unique_values_of_roll == {0, 2, 4}: 
-#         print("You got a four of a kind + a pair! You get 1,500 points")
         return 1500
     
-# dealing with mid-number-of-dice combos plus extras...
 def check_5_4_dice_combos(roll: set):
     points = 0
     values_count_dict = roll_to_dict(roll)
-#     print(f"{values_count_dict}")
     unique_values_of_roll = set(values_count_dict.values())
-#     print(f"{unique_values_of_roll}")
     # 5 of a kind
     if 5 in unique_values_of_roll:
         points = 2000
-#         # find value of non-quintuple roll value
+        # find value of non-quintuple roll value
         if len(roll) > 5:
             non_5_pair_die = tuple(key for key, value in values_count_dict.items() if value == 1)
             points += check_single_die(non_5_pair_die)
-#         print(f"You got a five of a kind! You get {points} points")
         return points
     # four of a kind
     elif 4 in unique_values_of_roll:
@@ -86,7 +73,6 @@ def check_5_4_dice_combos(roll: set):
         if len(roll) > 4:
             non_4_pair_die = tuple(key for key, value in values_count_dict.items() if 1 <= value <= 2)
             points = check_multiple_single_dies(non_4_pair_die, points)
-#         print(f"You got a four of a kind! You get {points} points")
         return points
     else:
         return None
@@ -103,18 +89,15 @@ def check_3_dice_combos(roll: set):
         if len(roll) > 3:
             other_dice = tuple(key for key, value in values_count_dict.items() if 1 <= value <= 2)
             points = check_multiple_single_dies(other_dice, points)
-#         print(f"You got a triple! You get {points} points")
     else:
         points = check_multiple_single_dies(roll, points)
         if points > 0:
             pass
-#             print(f"You got a one or a five! You get {points} points")
         elif points == 0: 
             points = 0
-#             print("Sorry, you didn't score any points.")
     return points
 
-# the important function
+# the most important function
 def get_score_of_roll(roll: set):
     points = None
     if len(roll) == 6:
@@ -124,7 +107,6 @@ def get_score_of_roll(roll: set):
         if points == None:
             points = check_3_dice_combos(roll)
     return points
-
 
 def find_unique_combos(x_dice_combos: list):
     combos_sum_dict = {}
@@ -192,12 +174,11 @@ def find_count_of_scores(all_combos_for_x_dice_w_scores: dict):
         pct_probability = round((scores_w_count[1][idx] / number_of_possibilities) * 100, 1) 
         fraction_probability = Fraction(scores_w_count[1][idx], number_of_possibilities)
         scores_w_count_dict[item] = [pct_probability, fraction_probability]
-#     scores_w_count_dict = dict(zip(scores_w_count[0], scores_w_count[1]))
     return scores_w_count_dict
 
 def find_odds_of_scoring_at_or_above_x(score_to_beat: int, count_of_scores_x:dict):
     assert score_to_beat > 0
-    assert score_to_beat <= 3001, f"It's impossible to roll above 3000, so you won't be able to roll score_to_beat"
+    assert score_to_beat <= 3001, f"It's impossible to roll above 3000, so you won't be able to roll {score_to_beat}"
     dict_keys = [int(x) for x in count_of_scores_x]
     dict_keys_above_score_to_beat = [x for x in dict_keys if x >= score_to_beat]
     count_of_scores_above_scores_to_beat = {key: value for key,value in count_of_scores_x.items()
