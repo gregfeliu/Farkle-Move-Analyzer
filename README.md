@@ -1,10 +1,12 @@
 # Farkle Move Analyzer
 
-## Description
+## What is Farkle?
 
 Farkle (also called Fark) is a multi-player dice game. In this game, one tries to score more points than the other players. Each player must roll all of the dice available to them and the need to score in order to continue playing in that round. After each roll, the player must remove one die, collect the points that the die gives them. If no point-collecting values are rolled, the player loses any points accumulated in that turn (called "farks"), and the next player rolls. If they score, however, they continue the roll-collect-remove process until there is only one dice left. If they score with the last dice, they get all 6 dice back and continue playing. For the full rules of the game, see the following graphic: 
 
 ![Rule of Farkle](./images/farkle_rules.png) 
+
+## Description 
 
 In this project, **I seek to understand more about the probabilities of both scoring points the number of points that can be scored on each roll**. The main findings can be found in the following graphic:
 
@@ -15,9 +17,11 @@ As you can see, rolling more dice gives you a much larger possibility of both sc
 Using these findings, one can more have a more complete understanding of the game and what the best move is at any turn. For example, if one rolls 6 dice and the only point scoring dice are two 5's, should the player pick up both 5's and collect 100 points or should they only pick up one? Which option will net more points? In this case, we notice the difference in mean and median scores between rolling 5 dice and rolling 4 dice. The difference in medians is 50 points, meaning that in most scenarios, the person will roll at least a 5 in the next roll if they remove one 5. The difference in means is more than 50, meaning that on average rolling with 5 dice will score even more than 50 more points than rolling with 4 dice. Lastly the chance of farking is reduced by 8.3% by rolling with 5 dice instead of 4. All 3 ways of analyzing the choice show that only removing one five is the optimal choice. 
 
 ## Future Work
-It would be fascinating to see an AI use reinforcement learning to identify the optimal strategy. The AI could take into account the scores of the other players, the number of points to win the game, etc. in conjunction with the expected number of points scored and other insights from this work. The optimal strategy for *any* player decision in this game could be made with the maximum accuracy possible.
+Developing and testing the optimal strategy in the game is the logical next step. We have all of the information we need, all we need to do is use it correctly and the game could be impossible to lose! To reach this goal, it seems that the player (or even AI) will need to find the optimal level of risk in their gameplay. If they have one dice left, is it better to keep the points you have or to risk it all? Testing which strategy nets more points would be fascinating to anyone involved with the game. Perhaps reinforcement learning could help discover this ideal mix of risk and reward. 
 
-Actually developing the optimal strategy and comparing it to actual gameplay would also be extremely fascinating. How do they differ? We would discover many interesting aspects of human behavior in this effort. Are humans too risk averse while playing this game? How much do they differ to the optimal strategy? 
+One aspect of the game that hasn't been considered thus far is the "strength of the board." How many points do my opponents have? How close are they to winning it all? I would be fascinated to see how the knowledge gained from this project could be used in conjunction with the number of points among the other players. How different is the strategy between the beginning and end of the game? 
+
+Lastly, if it were possible to determine the optimal strategy for Farkle, how would it differ from "human" play? What are humans doing that is holding back their play? Are we too aggressive? Too passive? This is not some far off dream, either, many games have been "solved" in some capacity: chess and go with [AlphaZero](https://en.wikipedia.org/wiki/AlphaZero), poker with [PioSOLVER](https://www.piosolver.com), and many others. Only testing and experimentation will reveal the answer.
 
 ## Technologies Used
 - Jupyter Notebook
